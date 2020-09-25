@@ -12,6 +12,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r include=FALSE}
 require(tidyverse)
 require(tigerstats)
+require(knitr)
 davisdata <- read.csv(file="UCDavis.csv")
 ```
 ## Our Goal is to answer this question Is there a difference between the alcohol consumed between the row
@@ -35,9 +36,18 @@ basicCN + geom_boxplot()
 basicCN + geom_boxplot(notch=TRUE,outlier.color = "red") + stat_boxplot(geom ='errorbar') + labs(title="Fancy notch boxplot \n with 2 lines")
 ```
 
-## Numerical Summarys 
+## Numerical Summarys
+
+```{r}
+favstats(alcohol~Seat,data=davisdata)
+```
 
 ## Inferential Tests
+```{r}
+favstats(alcohol~Seat,data=davisdata)
+```
+
+
 
 ## Conclusions
 
