@@ -18,8 +18,9 @@ davisdata <- read.csv(file="UCDavis.csv")
 ## Our Goal is to answer this question Is there a difference between the alcohol consumed between the row
 ## you choose to sit in??
 
-$H_O$: There is no difference among the mean amount of alcohol consumed per week by row
-$H_A$
+$H_O$: There is no difference among the mean amount of alcohol consumed per week based on where you sit
+
+$H_A$: The alternative hypothesis is that there is a difference in the mean amount of alcohol consumption per week based on where you sit
 
 ## Now with ggplot - first select the basic data
 
@@ -46,13 +47,17 @@ favstats(alcohol~Seat,data=davisdata)
 ```
 
 ## Inferential Tests
+
 ```{r}
 model1 <- aov(alcohol~Seat,data=davisdata)
 summary.aov(model1)
 ```
-
-
+```{r}
+#we specify the margins starting at the bottom and proceeding clockwise - thus 8.7 is the left side margin to hold the names of the factors
+par(mar = c(3, 8.7, 2, 2))
+plot(TukeyHSD(model1),las=2)
+```
 
 ## Conclusions
 
-The P value is less than 0.05 which leads to reject the null hypothesis. The boxplots show that people who sit in the back row consume the most alcohol as oppose to people who sit in the front and middle row.
+The P value is less than 0.000116 < 0.05 which leads to reject the null hypothesis. The boxplots show that people who sit in the back row consume the most mean amount of alcohol as oppose to people who sit in the front and middle row.
